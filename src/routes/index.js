@@ -18,7 +18,9 @@ router.delete('/users/:user_id/unfollow', userController.unfollowUser);
 
 // --- Post Management ---
 router.post('/posts', postController.createPost);
+router.get('/posts/:post_id', postController.getPostDetails);
 router.post('/posts/:post_id/like', postController.likePost);
+router.delete('/posts/:post_id/unlike', postController.unlikePost);
 router.post('/posts/:post_id/comments', postController.commentOnPost);
 
 // --- The Feed Endpoint ---

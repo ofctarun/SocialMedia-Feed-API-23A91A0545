@@ -75,3 +75,44 @@ exports.commentOnPost = async (req, res) => {
         res.status(500).json({ error: e.message });
     }
 };
+
+// 5. Get Single Post Details
+exports.getPostDetails = async (req, res) => {
+    try {
+        const { post_id } = req.params;
+        const post = await Post.findOne({
+            where: { id: post_id },
+            include: [
+                { model: User, attributes: ['username'] },
+                // Include recent likes/comments if needed, or just counts
+                { model: Comment, limit: 3, order: [['createdAt', 'DESC']] } 
+            ]
+        });
+        if (!post) return res.status(404).json({ error: "Post not found" });
+        res.json(post);
+    } catch (e) { res.status(500).json({ error: e.message }); }
+};
+
+// 6. Unlike a Post
+exports.unlikePost = async (req, res) => {
+    const { post_id } = req.params;
+    const { userId } = req.body;
+
+    const t = await sequelize.transaction();
+    try {
+        const deleted = await Like.destroy({
+            where: { userId, postId: post_id },
+            transaction: t
+        });
+
+        if (deleted) {
+            await Post.decrement('like_count', { where: { id: post_id }, transaction: t });
+        }
+
+        await t.commit();
+        res.json({ message: "Post unliked" });
+    } catch (e) {
+        await t.rollback();
+        res.status(500).json({ error: e.message });
+    }
+};
