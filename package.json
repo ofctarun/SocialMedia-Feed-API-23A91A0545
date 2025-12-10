@@ -1,0 +1,29 @@
+{
+  "name": "social-feed-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ofctarun/SocialMedia-Feed-API-23A91A0545.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ofctarun/SocialMedia-Feed-API-23A91A0545/issues"
+  },
+  "homepage": "https://github.com/ofctarun/SocialMedia-Feed-API-23A91A0545#readme",
+  "description": "",
+  "dependencies": {
+    "body-parser": "^2.2.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "mysql2": "^3.15.3",
+    "redis": "^5.10.0",
+    "sequelize": "^6.37.7"
+  }
+}
